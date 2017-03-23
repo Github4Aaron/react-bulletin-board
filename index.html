@@ -10,17 +10,16 @@
         <div id='react-container'></div>
         <script type="text/babel"> 
                
-                class MyComponent extends React.Component {
-                    render() {
-                         return <div>
-                                <h1> Hello World </h1>
-                                    <p>This is one of my first React Components</p>  
+                const MyComponent = () => {
+                    return <div>
+                                <h1> This Component is made using a stateless function </h1>
+                                    <p>This is a simple function that returns a React element.</p>  
                                 
                                 </div>
-                    }
                 }
+                
                
-
+            
                 ReactDOM.render(<MyComponent />, 
                 document.getElementById('react-container'))
         </script>
