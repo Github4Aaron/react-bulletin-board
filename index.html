@@ -10,33 +10,49 @@
     <body>
         <div id='react-container'></div>
         <script type="text/babel">
-                var Checkbox = React.createClass({
+                var Note = React.createClass({
                     getInitialState(){
-                        return {checked: false}
-                        },
-                        handleCheck() {
-                            this.setState({checked: !this.state.checked})
-                        }, 
-                        render () {
-                            var msg
-                                if(this.state.checked) {
-                                    msg = "checked"
-                                } else {
-                                    msg = "unchecked"
-                                }
-                            return (
-                                <div>
-                                    <input type="checkbox" 
-                                    onChange={this.handleCheck}/>
-                                    <p>This box is {msg}</p>
+                        return {editing: false}
+                    },
 
-                                </div>)
-                        }
-                })
-
-                ReactDOM.render(<Checkbox />, 
-                document.getElementById('react-container'))
-        
+                    edit(){
+                        this.setState({editing: true})
+                    },
+                    save() {
+                        this.setState({editing: false})
+                    },
+                    remove(){
+                        alert("removing note")
+                    },
+                    renderForm(){
+                        return (
+                            <div className="note">
+                                <textarea></textarea>
+                                <button onClick={this.save}>Save</button>
+                            </div>
+                        )
+                    },
+                    renderDisplay() {
+                        return (
+                          <div className="note">
+                              <p>{this.props.children}</p>
+                              <span>
+                                  <button onClick={this.edit}>Edit</button>  
+                                  <button onClick={this.remove}>Remove</button>
+                              </span>
+                          </div>
+                      )
+                    },
+                  render() {
+                      if (this.state.editing) {
+                          return this.renderForm()
+                      } else {
+                          return this.renderDisplay()
+                      }
+                  }
+              }) 
+              ReactDOM.render(<Note>Hello World</Note>,
+              document.getElementById('react-container'))
 
         </script>
     </body>
