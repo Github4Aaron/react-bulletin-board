@@ -14,6 +14,15 @@
                     getInitialState(){
                         return {editing: false}
                     },
+                    componentWillMount(){
+                        this.style = {
+                            right: this.randomBetween(0, window.innerWidth - 150, 'px'),
+                            top: this.randomBetween(0, window.innerHeight -150, 'px')
+                        }
+                    },
+                    randomBetween(x, y, s) {
+                        return (x + Math.ceil(Math.random() * (y-x))) + s
+                    },
 
                     edit(){
                         this.setState({editing: true})
@@ -27,7 +36,8 @@
                     },
                     renderForm(){
                         return (
-                            <div className="note">
+                            <div className="note"
+                                style={this.style}>
                                 <textarea ref="newText"></textarea>
                                 <button onClick={this.save}>Save</button>
                             </div>
@@ -35,7 +45,8 @@
                     },
                     renderDisplay() {
                         return (
-                          <div className="note">
+                          <div className="note"
+                                style={this.style}>
                               <p>{this.props.children}</p>
                               <span>
                                   <button onClick={this.edit}>Edit</button>  
@@ -67,6 +78,7 @@
                          notes: []
                      }
                     },
+               
                     nextId() {
                         this.uniqueId = this.uniqueId || 0
                         return this.uniqueId++
@@ -107,11 +119,11 @@
                  render() {
                      return(<div className='board'>
                             {this.state.notes.map(this.eachNote)}
-                            <button onClick={() => this.add()}>+</button>
+                            <button onClick={() => this.add("new note")}>+</button>
                          </div>)
                  }
              })
-              
+               
               ReactDOM.render(<Board count={10}/>,
               document.getElementById('react-container'))
 
