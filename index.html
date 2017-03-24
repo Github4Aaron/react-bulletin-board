@@ -10,27 +10,31 @@
     <body>
         <div id='react-container'></div>
         <script type="text/babel">
-                var Note = React.createClass({
-                    edit(){
-                        alert("editing note")
-                    },
-                    remove(){
-                        alert("removing note")
-                    },
-                  render() {
-                      return (
-                          <div className="note">
-                              <p>{this.props.children}</p>
-                              <span>
-                                  <button onClick={this.edit}>Edit</button>  
-                                  <button onClick={this.remove}>text</button>
-                              </span>
-                          </div>
-                      )
-                  }
-              }) 
+                var Checkbox = React.createClass({
+                    getInitialState(){
+                        return {checked: false}
+                        },
+                        handleCheck() {
+                            this.setState({checked: !this.state.checked})
+                        }, 
+                        render () {
+                            var msg
+                                if(this.state.checked) {
+                                    msg = "checked"
+                                } else {
+                                    msg = "unchecked"
+                                }
+                            return (
+                                <div>
+                                    <input type="checkbox" 
+                                    onChange={this.handleCheck}/>
+                                    <p>This box is {msg}</p>
 
-                ReactDOM.render(<Note>Hello World</Note>, 
+                                </div>)
+                        }
+                })
+
+                ReactDOM.render(<Checkbox />, 
                 document.getElementById('react-container'))
         
 
