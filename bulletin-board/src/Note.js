@@ -14,10 +14,14 @@ var Note = React.createClass({
             },
             componentDidUpdate() {
                 if (this.state.editing) {
-                    this.refs.newText.focus()
+                    this.refs.newText.focus() //highlights editing section
                     this.refs.newText.select()
                 }
             },
+            //shouldComponentUpdate occurs right BEFORE rendering and is used for optimization.
+            // only renders IF user changes edit field;
+            //if they click on "edit" but dont change field, it won't render.
+            //if prop or state change has NOT happend, no re-render
             shouldComponentUpdate(nextProps, nextState) {
                 return this.props.children !== nextProps.children || this.state !== nextState
             },
